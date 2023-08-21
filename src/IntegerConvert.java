@@ -21,7 +21,20 @@ public class IntegerConvert {
 	 * @throws NumberFormatException the number format exception
 	 */
 	public static int parseInt(String in) throws NumberFormatException {
-		return 0;
+		int val = 0;
+		int weight = 1;
+		String str = in;
+		
+		if (in.charAt(0) == '+' || in.charAt(0) == '-') str = in.substring(1);
+		for(int i = 0; i < str.length();i++) {
+			if (str.charAt(str.length()-1-i) == '_' || str.charAt(str.length()-1-i) == ' ') continue;
+			int digit = str.charAt(str.length()-1-i) - '0';
+			val += digit * weight;
+			weight = weight * 10;
+		}
+		
+		if (in.charAt(0) == '-') return (val * (-1));
+		return (val);
 	}
 
 	/**
@@ -32,9 +45,23 @@ public class IntegerConvert {
 	 * @throws NumberFormatException the number format exception
 	 */
 	public static byte parseByte(String in) throws NumberFormatException {
-		return 0;
+		byte val = 0;
+		int weight = 1;
+		String str = in;
+		
+		if (in.charAt(0) == '+' || in.charAt(0) == '-') str = in.substring(1);
+		
+		for(int i = 0; i < str.length();i++) {
+			if (str.charAt(str.length()-1-i) == '_' || str.charAt(str.length()-1-i) == ' ') continue;
+			int digit = str.charAt(str.length()-1-i) - '0';
+			val += (byte)(digit * weight);
+			weight = weight * 10;
+		}
+		
+		if (in.charAt(0) == '-') return (byte)(val * (-1));
+		return (val);
 	}
-	
+
 	/**
 	 * Parses an unsigned binary string and returns the equivalent integer value (signed)
 	 *
@@ -43,8 +70,21 @@ public class IntegerConvert {
 	 * @throws NumberFormatException the number format exception
 	 */
 	public static int parseBinStrToInt(String in) throws NumberFormatException {
-		return 0;
-	}
+		int val = 0;
+		int digit = 0;
+		int weight = 1;
+		in = in.substring(2);
+
+		for (int i = in.length()-1; i >= 0; i--) {
+			if (in.charAt(i) == '_' || in.charAt(i) == ' ') continue;
+			digit = in.charAt(i) - '0';
+			val += digit * weight;
+			weight = weight * 2;
+		}
+		return val;
+ 	}
+	
+	
 	
 	/**
 	 * Parses an unsigned binary string and returns the equivalent byte value (signed) 
@@ -54,7 +94,18 @@ public class IntegerConvert {
 	 * @throws NumberFormatException the number format exception
 	 */
 	public static byte parseBinStrToByte(String in) throws NumberFormatException {
-		return 0;
+		byte val = 0;
+		byte digit = 0;
+		byte weight = 1;
+		in = in.substring(2);
+
+		for (int i = in.length()-1; i >= 0; i--) {
+			if (in.charAt(i) == '_' || in.charAt(i) == ' ') continue;
+			digit = (byte)(in.charAt(i) - '0');
+			val += digit * weight;
+			weight = (byte) (weight * 2);
+		}
+		return val;
 	}
 	
 	/**
@@ -128,6 +179,48 @@ public class IntegerConvert {
 		// TODO Auto-generated method stub
 		// You should write basic testing of each of your methods here.
 		// I will provide a more comprehensive testing using JUnit.
+		
+		System.out.print("0b0000_0001" + " = "); 
+		System.out.println(parseBinStrToByte("0b0000_0001")); //should print 1
+		
+		System.out.print("0b10000000" + " = "); 
+		System.out.println(parseBinStrToByte("0b10000000"));  //should print -128
+		
+		System.out.print("0b11111111" + " = "); 
+		System.out.println(parseBinStrToByte("0b11111111"));  //should print -1
+		
+		
+		
+		System.out.print("0b0111_1111_1111_1111_1111_1111_1111_1111" + " = "); 
+		System.out.println(parseBinStrToInt("0b0111_1111_1111_1111_1111_1111_1111_1111")); //should print 2147483647
+		
+		System.out.print("0b1000_0000_0000_0000_0000_0000_0000_0000" + " = "); 
+		System.out.println(parseBinStrToInt("0b1000_0000_0000_0000_0000_0000_0000_0000")); //should print -2147483648
+		
+		System.out.print("0b1111_1111_1111_1111_1111_1111_1111_1111" + " = "); 
+		System.out.println(parseBinStrToInt("0b1111_1111_1111_1111_1111_1111_1111_1111")); //should print -1
+		
+		
+		
+		System.out.print("0" + " = "); 
+		System.out.println(parseByte("0")); //should print 0
+		
+		System.out.print("12__7" + " = "); 
+		System.out.println(parseByte("12__7")); //should print 127
+		
+		System.out.print("-1____2__8" + " = "); 
+		System.out.println(parseByte("-1____2__8")); //should print -128
+		
+		
+		
+		System.out.print("000010_2__7" + " = "); 
+		System.out.println(parseInt("000010_2__7")); //should print 1027
+		
+		System.out.print("-000000" + " = "); 
+		System.out.println(parseInt("-000000")); //should print 0
+		
+		System.out.print("+135" + " = "); 
+		System.out.println(parseInt("+135")); //should print 135
 
 	}
 
