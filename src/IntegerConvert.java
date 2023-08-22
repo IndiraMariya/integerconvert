@@ -24,11 +24,26 @@ public class IntegerConvert {
 		int val = 0;
 		int weight = 1;
 		String str = in;
+		final int MAX = 2147483647;
+		final int MIN = -2147483648;
+		
+		if (str.equals("") || str.equals("+") || str.equals("-") || str.equals("_") ) {
+			throw new NumberFormatException("Invalid Input String.");
+		}
 		
 		if (in.charAt(0) == '+' || in.charAt(0) == '-') str = in.substring(1);
+		
 		for(int i = 0; i < str.length();i++) {
+			if (str.charAt(i)-'0'> 9  || str.charAt(i)-'0'< 0) {
+				if (str.charAt(i) != '_') throw new NumberFormatException("String must have numbers or underscores");
+			}
+			if (str.equals("_"))throw new NumberFormatException("String must have numbers or underscores");
+
 			if (str.charAt(str.length()-1-i) == '_' || str.charAt(str.length()-1-i) == ' ') continue;
 			int digit = str.charAt(str.length()-1-i) - '0';
+			
+//			if (MAX - val < (digit * weight) || MIN - val < (digit * weight)) throw new NumberFormatException("a;kerjgnf");
+					
 			val += digit * weight;
 			weight = weight * 10;
 		}
@@ -214,10 +229,10 @@ public class IntegerConvert {
 		
 		
 		System.out.print("000010_2__7" + " = "); 
-		System.out.println(parseInt("000010_2__7")); //should print 1027
+		System.out.println(parseInt("-2147483648")); //should print 1027
 		
-		System.out.print("-000000" + " = "); 
-		System.out.println(parseInt("-000000")); //should print 0
+		System.out.print("2_1_4_7_4_8_3_6_4_7___" + " = "); 
+		System.out.println(parseInt("2_1_4_7_4_8_3_6_4_7___")); //should print 0
 		
 		System.out.print("+135" + " = "); 
 		System.out.println(parseInt("+135")); //should print 135
