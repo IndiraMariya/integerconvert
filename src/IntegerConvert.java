@@ -31,7 +31,6 @@ public class IntegerConvert {
 			throw new NumberFormatException("Invalid Input String.");
 		if (in.charAt(0) == '-') negative = true;
 		if (in.charAt(0) == '+' || in.charAt(0) == '-') in = in.substring(1);
-		
 		for(int i = 0; i < in.length();i++) {
 			if (in.charAt(i)-'0'> 9  || in.charAt(i)-'0'< 0) {
 				if (in.charAt(i) != '_') throw new NumberFormatException("String must have numbers or underscores");
@@ -102,10 +101,19 @@ public class IntegerConvert {
 		int val = 0;
 		int digit = 0;
 		int weight = 1;
+		int count = 0;
+		
+		if (in.equals("")) throw new NumberFormatException("empty string");
+		if (in.length()<= 2 || !(in.substring(0,2).equals("0b"))) throw new NumberFormatException("String needs to start with 0b");
 		in = in.substring(2);
 
 		for (int i = in.length()-1; i >= 0; i--) {
-			if (in.charAt(i) == '_' || in.charAt(i) == ' ') continue;
+			if (!(in.charAt(i) == '0' || in.charAt(i) == '1' || in.charAt(i) == '_')) throw new NumberFormatException("String needs to contain 0,1, or _");
+			if (in.charAt(i) == '_') {
+				count ++;
+				continue;
+			}
+			if (i == 0 && in.length() -count > 32 || in.length() - count == 0) throw new NumberFormatException("too long input string");
 			digit = in.charAt(i) - '0';
 			val += digit * weight;
 			weight = weight * 2;
@@ -129,9 +137,8 @@ public class IntegerConvert {
 		int count = 0;
 		
 		if (in.equals("")) throw new NumberFormatException("empty string");
-		if (!(in.substring(0,2).equals("0b"))) throw new NumberFormatException("String needs to start with 0b");
+		if (in.length()<= 2 || !(in.substring(0,2).equals("0b"))) throw new NumberFormatException("String needs to start with 0b");
 		in = in.substring(2);
-
 		for (int i = in.length()-1; i >= 0; i--) {
 			if (!(in.charAt(i) == '0' || in.charAt(i) == '1' || in.charAt(i) == '_')) throw new NumberFormatException("String needs to contain 0,1, or _");
 			
@@ -139,12 +146,13 @@ public class IntegerConvert {
 				count ++;
 				continue;
 			}
+			if (i == 0 && in.length() -count > 8 || in.length() - count == 0) throw new NumberFormatException("too long input string");
+			
 			digit = (byte)(in.charAt(i) - '0');
 			val += digit * weight;
 			weight = (byte) (weight * 2);
 		}
 		
-		if (in.length()- 2 -count > 8 || in.length() - count == 0) throw new NumberFormatException("too long input string");
 		return val;
 	}
 	
@@ -254,8 +262,11 @@ public class IntegerConvert {
 		
 		
 //		System.out.print("000010_2__7" + " = "); 
-		System.out.println(parseBinStrToByte("")); //should print 1027
-//		
+//		System.out.println(parseBinStrToByte("")); //should print 1027
+//		System.out.println(parseBinStrToByte("0b"));
+//		System.out.println(parseBinStrToByte("0x"));
+//		System.out.println(parseBinStrToByte("0"));
+		System.out.println(parseBinStrToInt("0b0111_1111_1111_1111_1111_1111_1111_1111"));
 //		System.out.print("2_1_4_7_4_8_3_6_4_7___" + " = "); 
 //		System.out.println(parseInt("2_1_4_7_4_8_3_6_4_7___")); //should print 0
 //		
