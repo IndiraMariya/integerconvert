@@ -244,10 +244,9 @@ public class IntegerConvert {
 		String str = "";
 		
 		for (int i = 0; i < 8; i++) {
-			 int nibble = (in >> (4 * (7 - i))) & 0xF; // Extract 4 bits at a time
+			 int nibble = (in >> (4 * (7 - i))) & 0xF;
 		     str += chars[nibble];
 		}
-		
 		return(str);
 	}
 	
@@ -260,12 +259,11 @@ public class IntegerConvert {
 	public static String byteToHexString(byte in) {
 		String[] chars = {"0","1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"};
 		String str = "";
-		
+	
 		for (int i = 0; i < 2; i++) {
-			 int nibble = (in >> (4 * (1 - i))) & 0xF; // Extract 4 bits at a time
+			 int nibble = (in >> (4 * (1 - i))) & 0xF;
 		     str += chars[nibble];
 		}
-		
 		return(str);
 	}
 	
@@ -279,49 +277,68 @@ public class IntegerConvert {
 		// You should write basic testing of each of your methods here.
 		// I will provide a more comprehensive testing using JUnit.
 		
-//		System.out.print("0b0000_0001" + " = "); 
-//		System.out.println(parseBinStrToByte("0b0000_0001")); //should print 1
-//		
-//		System.out.print("0b10000000" + " = "); 
-//		System.out.println(parseBinStrToByte("0b10000000"));  //should print -128
-//		
-//		System.out.print("0b11111111" + " = "); 
-//		System.out.println(parseBinStrToByte("0b11111111"));  //should print -1
-//		
-//		
-//		
-//		System.out.print("0b0111_1111_1111_1111_1111_1111_1111_1111" + " = "); 
-//		System.out.println(parseBinStrToInt("0b0111_1111_1111_1111_1111_1111_1111_1111")); //should print 2147483647
-//		
-//		System.out.print("0b1000_0000_0000_0000_0000_0000_0000_0000" + " = "); 
-//		System.out.println(parseBinStrToInt("0b1000_0000_0000_0000_0000_0000_0000_0000")); //should print -2147483648
-//		
-//		System.out.print("0b1111_1111_1111_1111_1111_1111_1111_1111" + " = "); 
-//		System.out.println(parseBinStrToInt("0b1111_1111_1111_1111_1111_1111_1111_1111")); //should print -1
-//		
-//		
-//		
-//		System.out.print("0" + " = "); 
-//		System.out.println(parseByte("0")); //should print 0
-//		
-//		System.out.print("12__7" + " = "); 
-//		System.out.println(parseByte("12__7")); //should print 127
-//		
-//		System.out.print("-1____2__8" + " = "); 
-//		System.out.println(parseByte("-1____2__8")); //should print -128
-//		
-//		
-//		
-//		System.out.print("000010_2__7" + " = "); 
-//		System.out.println(parseInt("000010_2__7")); //should print 1027
-//		
-//		System.out.print("2_1_4_7_4_8_3_6_4_7___" + " = "); 
-//		System.out.println(parseInt("2_1_4_7_4_8_3_6_4_7___")); //should print 0
-//		
-//		System.out.print("+135" + " = "); 
-//		System.out.println(parseInt("+135")); //should print 135
+		// testing binary string to number conversions
+		System.out.print("0b0000_0001" + " = "); 
+		System.out.println(parseBinStrToByte("0b0000_0001")); //should print 1
 		
-		System.out.println(byteToHexString((byte) -128));
+		System.out.print("0b10000000" + " = "); 
+		System.out.println(parseBinStrToByte("0b10000000"));  //should print -128
+		
+		System.out.print("0b11111111" + " = "); 
+		System.out.println(parseBinStrToByte("0b11111111"));  //should print -1
+		
+		
+		System.out.print("0b0111_1111_1111_1111_1111_1111_1111_1111" + " = "); 
+		System.out.println(parseBinStrToInt("0b0111_1111_1111_1111_1111_1111_1111_1111")); //should print 2147483647
+		
+		System.out.print("0b1000_0000_0000_0000_0000_0000_0000_0000" + " = "); 
+		System.out.println(parseBinStrToInt("0b1000_0000_0000_0000_0000_0000_0000_0000")); //should print -2147483648
+		
+		System.out.print("0b1111_1111_1111_1111_1111_1111_1111_1111" + " = "); 
+		System.out.println(parseBinStrToInt("0b1111_1111_1111_1111_1111_1111_1111_1111")); //should print -1
+		
+		
+		
+		//testing parse int and byte
+		System.out.print("0" + " = "); 
+		System.out.println(parseByte("0")); //should print 0
+		
+		System.out.print("12__7" + " = "); 
+		System.out.println(parseByte("12__7")); //should print 127
+		
+		System.out.print("-1____2__8" + " = "); 
+		System.out.println(parseByte("-1____2__8")); //should print -128
+		
+		
+		System.out.print("000010_2__7" + " = "); 
+		System.out.println(parseInt("000010_2__7")); //should print 1027
+		
+		System.out.print("2_1_4_7_4_8_3_6_4_7___" + " = "); 
+		System.out.println(parseInt("2_1_4_7_4_8_3_6_4_7___")); //should print 0
+		
+		System.out.print("+135" + " = "); 
+		System.out.println(parseInt("+135")); //should print 135
+		
+		
+		//Testing to Hex string conversions
+		System.out.print("-128" + " = "); 
+		System.out.println("0x" + byteToHexString((byte) -128));
+		
+		System.out.print("16" + " = "); 
+		System.out.println("0x" + byteToHexString((byte) 16));
+		
+		System.out.print("127" + " = "); 
+		System.out.println("0x" + byteToHexString((byte) 127));
+		
+		
+		System.out.print("-2147483647" + " = "); 
+		System.out.println("0x" + intToHexString((byte) -2147483647));
+		
+		System.out.print("-1" + " = "); 
+		System.out.println("0x" + intToHexString((byte) -1));
+		
+		System.out.print("3000" + " = "); 
+		System.out.println("0x" + intToHexString((byte) 3000));
 
 	}
 
