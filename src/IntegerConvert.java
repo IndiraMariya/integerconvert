@@ -25,14 +25,14 @@ public class IntegerConvert {
 		int weight = 1;
 		boolean negative = false;
 		final int MAX = 2147483647;
-		final int MIN = -2147483648;
+		final int maxDigit = 9;
 		
 		if (in.equals("") || in.equals("+") || in.equals("-") || in.equals("_") )
 			throw new NumberFormatException("Invalid Input String.");
 		if (in.charAt(0) == '-') negative = true;
 		if (in.charAt(0) == '+' || in.charAt(0) == '-') in = in.substring(1);
 		for(int i = 0; i < in.length();i++) {
-			if (in.charAt(i)-'0'> 9  || in.charAt(i)-'0'< 0) {
+			if (in.charAt(i)-'0'> maxDigit  || in.charAt(i)-'0'< 0) {
 				if (in.charAt(i) != '_') throw new NumberFormatException("String must have numbers or underscores");
 			}
 			if (in.equals("_"))throw new NumberFormatException("String must have numbers");
@@ -42,8 +42,10 @@ public class IntegerConvert {
 			if (!negative && MAX / weight < digit)throw new NumberFormatException("a;kerjgnf");
 			if (MAX / weight < digit) throw new NumberFormatException("a;kerjgnf");
 			
-			if (digit != 0 && negative && (MAX - (digit * weight) + 1 < val))throw new NumberFormatException("a;kerjgnf");
-			else if (digit != 0 && !negative && MAX - val < (digit * weight)) throw new NumberFormatException("a;kerjgnf");
+			if (digit != 0 && negative && (MAX - (digit * weight) + 1 < val))
+				throw new NumberFormatException("a;kerjgnf");
+			else if (digit != 0 && !negative && MAX - val < (digit * weight)) 
+				throw new NumberFormatException("a;kerjgnf");
 			val += digit * weight;
 			weight = weight * 10;
 		}
@@ -72,17 +74,21 @@ public class IntegerConvert {
 		
 		for(int i = 0; i < in.length();i++) {
 			if (in.charAt(i)-'0'> 9  || in.charAt(i)-'0'< 0) {
-				if (in.charAt(i) != '_') throw new NumberFormatException("String must have numbers or underscores");
+				if (in.charAt(i) != '_') throw new NumberFormatException("String needs numbers or underscores");
 			}
 			if (in.equals("_"))throw new NumberFormatException("String must have numbers");
 			if (in.charAt(in.length()-1-i) == '_' || in.charAt(in.length()-1-i) == ' ') continue;
 			int digit = in.charAt(in.length()-1-i) - '0';
 			
-			if (digit != 0 && !negative && MAX / weight < digit)throw new NumberFormatException("Digit is too high");
-			else if (digit != 0 && MAX / weight < digit) throw new NumberFormatException("Digit is too low");
+			if (digit != 0 && !negative && MAX / weight < digit)
+				throw new NumberFormatException("Digit is too high");
+			else if (digit != 0 && MAX / weight < digit) 
+				throw new NumberFormatException("Digit is too low");
 			
-			if (digit != 0 && negative && (MAX - (digit * weight) + 1 < val))throw new NumberFormatException("Number is too high");
-			else if (digit != 0 && !negative && MAX - val < (digit * weight)) throw new NumberFormatException("Number is too low");
+			if (digit != 0 && negative && (MAX - (digit * weight) + 1 < val))
+				throw new NumberFormatException("Number is too high");
+			else if (digit != 0 && !negative && MAX - val < (digit * weight)) 
+				throw new NumberFormatException("Number is too low");
 			val += digit * weight;
 			weight = (byte) (weight * 10);
 		}
@@ -104,16 +110,19 @@ public class IntegerConvert {
 		int count = 0;
 		
 		if (in.equals("")) throw new NumberFormatException("empty string");
-		if (in.length()<= 2 || !(in.substring(0,2).equals("0b"))) throw new NumberFormatException("String needs to start with 0b");
+		if (in.length()<= 2 || !(in.substring(0,2).equals("0b"))) 
+			throw new NumberFormatException("String needs to start with 0b");
 		in = in.substring(2);
 
 		for (int i = in.length()-1; i >= 0; i--) {
-			if (!(in.charAt(i) == '0' || in.charAt(i) == '1' || in.charAt(i) == '_')) throw new NumberFormatException("String needs to contain 0,1, or _");
+			if (!(in.charAt(i) == '0' || in.charAt(i) == '1' || in.charAt(i) == '_')) 
+				throw new NumberFormatException("String needs to contain 0,1, or _");
 			if (in.charAt(i) == '_') {
 				count ++;
 				continue;
 			}
-			if (i == 0 && in.length() -count > 32 || in.length() - count == 0) throw new NumberFormatException("too long input string");
+			if (i == 0 && in.length() -count > 32 || in.length() - count == 0) 
+				throw new NumberFormatException("too long input string");
 			digit = in.charAt(i) - '0';
 			val += digit * weight;
 			weight = weight * 2;
@@ -137,16 +146,19 @@ public class IntegerConvert {
 		int count = 0;
 		
 		if (in.equals("")) throw new NumberFormatException("empty string");
-		if (in.length()<= 2 || !(in.substring(0,2).equals("0b"))) throw new NumberFormatException("String needs to start with 0b");
+		if (in.length()<= 2 || !(in.substring(0,2).equals("0b"))) 
+			throw new NumberFormatException("String needs to start with 0b");
 		in = in.substring(2);
 		for (int i = in.length()-1; i >= 0; i--) {
-			if (!(in.charAt(i) == '0' || in.charAt(i) == '1' || in.charAt(i) == '_')) throw new NumberFormatException("String needs to contain 0,1, or _");
+			if (!(in.charAt(i) == '0' || in.charAt(i) == '1' || in.charAt(i) == '_')) 
+				throw new NumberFormatException("String needs to contain 0,1, or _");
 			
 			if (in.charAt(i) == '_') {
 				count ++;
 				continue;
 			}
-			if (i == 0 && in.length() -count > 8 || in.length() - count == 0) throw new NumberFormatException("too long input string");
+			if (i == 0 && in.length() -count > 8 || in.length() - count == 0) 
+				throw new NumberFormatException("too long input string");
 			
 			digit = (byte)(in.charAt(i) - '0');
 			val += digit * weight;
@@ -166,7 +178,8 @@ public class IntegerConvert {
 	public static int parseHexStrToInt(String in) throws NumberFormatException {
 		int digit = 0; 
 		int weight = 1;
-		int sum = 0; 
+		int sum = 0;
+		int base = 16;
 		
 		in = in.substring(2);
 		for (int i = in.length()-1; i >= 0; i--) {
@@ -174,7 +187,7 @@ public class IntegerConvert {
 			if (digit > 9) digit = in.charAt(i) - 'W';
 
 			sum += digit * weight;
-			weight = weight * 16;
+			weight = weight * base;
 		}
 		return sum;
 	}
@@ -210,7 +223,9 @@ public class IntegerConvert {
 	public static String intToBinaryString(int in) {
 		String str = "";
 		int mask = -2147483648;
-		for (int i = 0; i < 32; i++) {
+		final int BITS = 32;
+		
+		for (int i = 0; i < BITS; i++) {
 			str += ((mask & in)!=0)?"1":"0";
 			mask = mask >>> 1; 
 		}
@@ -226,7 +241,9 @@ public class IntegerConvert {
 	public static String byteToBinaryString(byte in) {
 		String str = "";
 		int mask = 128;
-		for (int i = 0; i < 8; i++) {
+		final int BITS = 8;
+		
+		for (int i = 0; i < BITS; i++) {
 			str += ((mask & in)!=0)?"1":"0";
 			mask = mask >>> 1;
 		}
@@ -242,9 +259,13 @@ public class IntegerConvert {
 	public static String intToHexString(int in) {
 		String[] chars = {"0","1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"};
 		String str = "";
+		int mask = 0x0f;
+		int nibble = 0;
+		int nibbles = 8;
+		int nibbleBits = 4;
 		
-		for (int i = 0; i < 8; i++) {
-			 int nibble = (in >> (4 * (7 - i))) & 0xF;
+		for (int i = 0; i < nibbles; i++) {
+			 nibble = (in >> (nibbleBits * (nibbles-1 - i))) & mask;
 		     str += chars[nibble];
 		}
 		return(str);
@@ -259,9 +280,13 @@ public class IntegerConvert {
 	public static String byteToHexString(byte in) {
 		String[] chars = {"0","1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"};
 		String str = "";
+		int mask = 0x0f;
+		int nibble = 0;
+		int nibbles = 2;
+		int nibbleBits = 4;
 	
-		for (int i = 0; i < 2; i++) {
-			 int nibble = (in >> (4 * (1 - i))) & 0xF;
+		for (int i = 0; i < nibbles; i++) {
+			 nibble = (in >> (nibbleBits * (nibbles-1 - i))) & mask;
 		     str += chars[nibble];
 		}
 		return(str);
