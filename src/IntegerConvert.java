@@ -39,13 +39,13 @@ public class IntegerConvert {
 			if (in.charAt(in.length()-1-i) == '_' || in.charAt(in.length()-1-i) == ' ') continue;
 			int digit = in.charAt(in.length()-1-i) - '0';
 			
-			if (!negative && MAX / weight < digit)throw new NumberFormatException("a;kerjgnf");
-			if (MAX / weight < digit) throw new NumberFormatException("a;kerjgnf");
+			if (!negative && MAX / weight < digit)throw new NumberFormatException("Number is out of range");
+			if (MAX / weight < digit) throw new NumberFormatException("Number is out of range");
 			
 			if (digit != 0 && negative && (MAX - (digit * weight) + 1 < val))
-				throw new NumberFormatException("a;kerjgnf");
+				throw new NumberFormatException("Number is out of range");
 			else if (digit != 0 && !negative && MAX - val < (digit * weight)) 
-				throw new NumberFormatException("a;kerjgnf");
+				throw new NumberFormatException("Number is out of range");
 			val += digit * weight;
 			weight = weight * 10;
 		}
@@ -65,7 +65,6 @@ public class IntegerConvert {
 		byte weight = 1;
 		boolean negative = false;
 		final byte MAX = 127;
-		final int MIN = -128;
 		
 		if (in.equals("") || in.equals("+") || in.equals("-") || in.equals("_") )
 			throw new NumberFormatException("Invalid Input String.");
@@ -108,6 +107,7 @@ public class IntegerConvert {
 		int digit = 0;
 		int weight = 1;
 		int count = 0;
+		final int MAXLEN = 32;
 		
 		if (in.equals("")) throw new NumberFormatException("empty string");
 		if (in.length()<= 2 || !(in.substring(0,2).equals("0b"))) 
@@ -121,7 +121,7 @@ public class IntegerConvert {
 				count ++;
 				continue;
 			}
-			if (i == 0 && in.length() -count > 32 || in.length() - count == 0) 
+			if (i == 0 && in.length() -count > MAXLEN || in.length() - count == 0) 
 				throw new NumberFormatException("too long input string");
 			digit = in.charAt(i) - '0';
 			val += digit * weight;
@@ -144,6 +144,7 @@ public class IntegerConvert {
 		byte digit = 0;
 		byte weight = 1;
 		int count = 0;
+		final int MAXLEN = 8;
 		
 		if (in.equals("")) throw new NumberFormatException("empty string");
 		if (in.length()<= 2 || !(in.substring(0,2).equals("0b"))) 
@@ -157,7 +158,7 @@ public class IntegerConvert {
 				count ++;
 				continue;
 			}
-			if (i == 0 && in.length() -count > 8 || in.length() - count == 0) 
+			if (i == 0 && in.length() - count > MAXLEN || in.length() - count == 0) 
 				throw new NumberFormatException("too long input string");
 			
 			digit = (byte)(in.charAt(i) - '0');
