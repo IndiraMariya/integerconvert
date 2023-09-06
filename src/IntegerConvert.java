@@ -358,13 +358,130 @@ public class IntegerConvert {
 		
 		
 		System.out.print("-2147483647" + " = "); 
-		System.out.println("0x" + intToHexString((byte) -2147483647));
+		System.out.println("0x" + intToHexString(-2147483647));
 		
 		System.out.print("-1" + " = "); 
-		System.out.println("0x" + intToHexString((byte) -1));
+		System.out.println("0x" + intToHexString(-1));
 		
 		System.out.print("3000" + " = "); 
-		System.out.println("0x" + intToHexString((byte) 3000));
+		System.out.println("0x" + intToHexString(3000));
+		
+		//Testing Binary String Conversions
+		System.out.print("-128" + " = "); 
+		System.out.println("0x" + byteToBinaryString((byte) -128));
+		
+		System.out.print("16" + " = "); 
+		System.out.println("0x" + byteToBinaryString((byte) 16));
+		
+		System.out.print("127" + " = "); 
+		System.out.println("0x" + byteToBinaryString((byte) 127));
+		
+		
+		System.out.print("-2147483647" + " = "); 
+		System.out.println("0x" + intToBinaryString(-2147483647));
+		
+		System.out.print("-1" + " = "); 
+		System.out.println("0x" + intToBinaryString(-1));
+		
+		System.out.print("3000" + " = "); 
+		System.out.println("0x" + intToBinaryString(3000));
+		
+		//Testing parseInt Exceptions
+		try {
+			parseInt("++");
+			System.out.println("Error: ++ did not throw exception");
+		} catch(NumberFormatException e) {
+			System.out.println("++ correctly caused Exception");
+		}
+		try {
+			parseInt("");
+			System.out.println("Error: Empty string did not throw exception");
+		} catch(NumberFormatException e) {
+			System.out.println("Empty string correctly caused Exception");
+		}
+
+		try {
+			parseInt("-b");
+			System.out.println("Error: b is not a valid input");
+		} catch(NumberFormatException e) {
+			System.out.println("b correctly caused Exception");
+		}
+		try {
+			parseInt("-2147483649");
+			System.out.println("Error: input string out of bounds");
+		} catch(NumberFormatException e) {
+			System.out.println("-2147483649 correctly caused Exception");
+		}
+		try {
+			parseInt("-2147483649");
+			System.out.println("Error: input string out of bounds");
+		} catch(NumberFormatException e) {
+			System.out.println("-2147483649 correctly caused Exception");
+		}
+
+		
+		
+		//Testing parseByte Exceptions
+		try {
+			parseByte("++");
+			System.out.println("Error: ++ did not throw exception");
+		} catch(NumberFormatException e) {
+			System.out.println("++ correctly caused Exception");
+		}
+		try {
+			parseByte("");
+			System.out.println("Error: Empty string did not throw exception");
+		} catch(NumberFormatException e) {
+			System.out.println("Empty string correctly caused Exception");
+		}
+
+		try {
+			parseByte("+1c2");
+			System.out.println("Error: +1c2 is not a valid input");
+		} catch(NumberFormatException e) {
+			System.out.println("b correctly caused Exception");
+		}
+		try {
+			parseByte("256");
+			System.out.println("Error: input string out of bounds");
+		} catch(NumberFormatException e) {
+			System.out.println("256 correctly caused Exception");
+		}
+		try {
+			parseByte("-129");
+			System.out.println("Error: input string out of bounds");
+		} catch(NumberFormatException e) {
+			System.out.println("-129 correctly caused Exception");
+		}
+		
+		
+		
+		//Testing parseBinStrToInt, parseBinStrToByte Exceptions
+		try {
+			parseBinStrToByte("0b");
+			System.out.println("Error: ++ did not throw exception");
+		} catch(NumberFormatException e) {
+			System.out.println("++ correctly caused Exception");
+		}
+		try {
+			parseBinStrToInt("");
+			System.out.println("Error: Empty string did not throw exception");
+		} catch(NumberFormatException e) {
+			System.out.println("Empty string correctly caused Exception");
+		}
+
+		try {
+			parseBinStrToInt("0b0110z10");
+			System.out.println("Error: 0b0110z10 is not a valid input");
+		} catch(NumberFormatException e) {
+			System.out.println("0b0110z10 correctly caused Exception");
+		}
+		try {
+			parseBinStrToByte("0b1111111111");
+			System.out.println("Error: input string out of bounds");
+		} catch(NumberFormatException e) {
+			System.out.println("0b1111111111 correctly caused Exception");
+		}
 
 	}
 
